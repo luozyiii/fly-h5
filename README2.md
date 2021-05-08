@@ -1,6 +1,7 @@
 ## 前端界面开发及功能优化
 
 ### 底部导航组件MenuBar开发
+antd-mobile TabBar 的二次封装
 
 - 目录
 /src/components/MenuBar
