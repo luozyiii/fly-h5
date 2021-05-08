@@ -18,3 +18,16 @@ import { BsHouseDoorFill } from 'react-icons/bs';
 
 - PropTypes
 类型检查
+
+### 首页开发
+
+- 将flex布局 mixin
+/src/assets/mixin.less
+
+- 对主页面进行解耦,组件化
+主页细分为 header search hot 三个组件模块
+
+- dayjs 处理时间
+```
+yarn add dayjs
+```
