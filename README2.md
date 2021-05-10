@@ -102,3 +102,12 @@ if (observer && node) {}
   <div className="swiper-pagination"></div>
 </AwesomeSwiper>
  ```
+ 
+- 弹窗组件优化
+```
+componentWillReceiveProps(nextProps) {
+  this.setState({
+    showModal: nextProps.show,
+  });
+}
+```
