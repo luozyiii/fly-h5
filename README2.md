@@ -49,5 +49,9 @@ yarn add dayjs
 - isIntersecting(true/false)
 是否在可视区域
 
+- 抽象成hook useObserverHook
+
+跳转到首页报错？？？
+Uncaught TypeError: Failed to execute 'unobserve' on 'IntersectionObserver': parameter 1 is not of type 'Element'.
 
 

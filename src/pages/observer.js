@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
+import { useObserverHook } from '@/hooks';
 
 let observer;
 export default function (props) {
@@ -11,24 +12,28 @@ export default function (props) {
     });
   };
 
-  useEffect(() => {
-    console.log('进入页面');
-    observer = new IntersectionObserver((entries) => {
-      console.log(entries);
-    });
-    observer.observe(document.querySelector('#loading'));
+  useObserverHook('#loading', (entries) => {
+    console.log(entries);
+  });
 
-    return () => {
-      console.log('离开页面');
-      if (observer) {
-        // 解绑元素
-        observer.unobserve(document.querySelector('#loading'));
+  // useEffect(() => {
+  //   console.log('进入页面');
+  //   observer = new IntersectionObserver((entries) => {
+  //     console.log(entries);
+  //   });
+  //   observer.observe(document.querySelector('#loading'));
 
-        // 停止监听
-        observer.disconnect();
-      }
-    };
-  }, []);
+  //   return () => {
+  //     console.log('离开页面');
+  //     if (observer) {
+  //       // 解绑元素
+  //       observer.unobserve(document.querySelector('#loading'));
+
+  //       // 停止监听
+  //       observer.disconnect();
+  //     }
+  //   };
+  // }, []);
 
   return (
     <div>
