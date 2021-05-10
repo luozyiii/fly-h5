@@ -76,6 +76,6 @@ export default {
         status: 200,
         data,
       });
-    }, 3000);
+    }, 600);
   },
 };

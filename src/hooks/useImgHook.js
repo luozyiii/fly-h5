@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { isEmpty } from 'project-libs';
 
 /**
  * 1、监听图片是否进入可视区域
@@ -12,7 +13,7 @@ let observer;
 export default function useImgHook(ele, callback, watch = []) {
   useEffect(() => {
     const nodes = document.querySelectorAll(ele);
-    if (nodes && nodes.length) {
+    if (!isEmpty(nodes)) {
       observer = new IntersectionObserver((entries) => {
         callback && callback(entries);
         entries.forEach((item) => {
@@ -29,7 +30,7 @@ export default function useImgHook(ele, callback, watch = []) {
       });
     }
     return () => {
-      if (nodes && nodes.length && observer) {
+      if (!isEmpty(nodes) && observer) {
         observer.disconnect();
       }
     };

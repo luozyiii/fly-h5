@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { SearchBar, ActivityIndicator } from 'antd-mobile';
 import { useHttpHook, useObserverHook, useImgHook } from '@/hooks';
 import { useLocation } from 'umi';
+import { ShowLoading } from '@/components';
+import { CommonEnum } from '@/enums';
 
 import './index.less';
 
@@ -9,10 +11,7 @@ export default function (props) {
   const { query } = useLocation();
   // console.log('query:', query);
   const [houseName, setHouseName] = useState();
-  const [page, setPage] = useState({
-    pageSize: 8,
-    pageNum: 1,
-  });
+  const [page, setPage] = useState(CommonEnum.PAGE);
   const [houseLists, setHouseLists] = useState([]);
   const [showLoading, setShowLoading] = useState(true);
   const [houseSubmitName, setHouseSubmitName] = useState('');
@@ -42,7 +41,7 @@ export default function (props) {
    * 4、监听loading的变化，拼装数据
    */
   useObserverHook(
-    '#loading',
+    '#' + CommonEnum.LOADING_ID,
     (entries) => {
       if (!loading && entries[0].isIntersecting) {
         console.log('11111111111111');
@@ -70,10 +69,7 @@ export default function (props) {
     // console.log(value);
     setHouseName(value);
     setHouseSubmitName(value);
-    setPage({
-      pageSize: 8,
-      pageNum: 1,
-    });
+    setPage(CommonEnum.PAGE);
     setHouseLists([]);
   };
 
@@ -119,11 +115,12 @@ export default function (props) {
               </div>
             </div>
           ))}
-          {showLoading ? (
+          <ShowLoading showLoading={showLoading} />
+          {/* {showLoading ? (
             <div id="loading">loading</div>
           ) : (
             <div>没有数据了</div>
-          )}
+          )} */}
         </div>
       )}
     </div>

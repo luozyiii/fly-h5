@@ -14,7 +14,8 @@
       "@@/*": ["src/.umi/*"],
       "@/hooks": ["hooks/index"],
       "@/components": ["components/index"],
-      "@/utils": ["utils/index"]
+      "@/utils": ["utils/index"],
+      "@/enums": ["enums/index"]
     },
     "allowSyntheticDefaultImports": true
   },

@@ -69,3 +69,17 @@ if (observer && node) {}
  * 3、停止监听当前的节点
 ```
 
+### 优化-提取公共组件，使用枚举，引入project-libs
+- ShowLoading
+
+- 枚举 enums
+/src/emums 定义一些常量
+
+- project-libs 
+[project-libs](https://github.com/cpagejs/project-libs)
+ 是一个常用函数集锦的工具库，包括浏览器、函数式、常用验证、cookie、数组处理等函数。
+
+ ```
+ yarn add project-libs
+
+ ```
