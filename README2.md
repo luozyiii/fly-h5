@@ -54,4 +54,9 @@ yarn add dayjs
 跳转到首页报错？？？
 Uncaught TypeError: Failed to execute 'unobserve' on 'IntersectionObserver': parameter 1 is not of type 'Element'.
 
+增加节点的判断 即可不报错
+```
+if (observer && node) {}
+```
+
 
