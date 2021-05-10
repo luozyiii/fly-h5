@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ShowLoading } from '@/components';
-// import { timer } from '@/utils';
+import { timer } from '@/utils';
 
 export default function (props) {
   const [state, setState] = useState();
@@ -17,7 +17,7 @@ export default function (props) {
             <div className="right">
               <div className="right-top">
                 <p>{item?.username}</p>
-                {/* <p>{timer(item?.createTime)}</p> */}
+                <p>{timer(item?.createTime)}</p>
               </div>
               <div className="right-bottom">{item?.info}</div>
             </div>
