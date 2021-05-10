@@ -34,3 +34,7 @@ yarn add dayjs
 
 ### 首页mock 数据
 - 使用自定义useHttpHook 发送请求，mock/home.js 返回数据
+
+### 搜索页面
+- antd-mobild SearchBar、ActivityIndicator 组件
+- /mock/house.js 接口延迟3s返回

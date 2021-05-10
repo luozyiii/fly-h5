@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Picker, List, Calendar, Button } from 'antd-mobile';
+import { Picker, List, Calendar, Button, Toast } from 'antd-mobile';
 import dayjs from 'dayjs';
+import { history } from 'umi';
 
 export default function (props) {
   // const [citys, setCitys] = useState([]);
@@ -25,6 +26,22 @@ export default function (props) {
       dayjs(endTime).format('YYYY-MM-DD');
     setTimes(_times);
     setDateShow(!dateShow);
+  };
+
+  const handleClick = () => {
+    if (times.includes('~')) {
+      let _times = times.split('~');
+      history.push({
+        pathname: '/search',
+        query: {
+          code: selectedCity,
+          startTime: _times[0],
+          endTime: _times[1],
+        },
+      });
+    } else {
+      Toast.fail('请选择时间');
+    }
   };
 
   useEffect(() => {}, []);
@@ -52,7 +69,7 @@ export default function (props) {
         <p className="search-time-right">{times}</p>
       </div>
       {/* 点击按钮 */}
-      <Button type="warning" size="large">
+      <Button type="warning" size="large" onClick={handleClick}>
         搜索民宿
       </Button>
 
