@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { SearchBar, ActivityIndicator } from 'antd-mobile';
-import { useHttpHook, useObserverHook } from '@/hooks';
+import { useHttpHook, useObserverHook, useImgHook } from '@/hooks';
 import { useLocation } from 'umi';
 
 import './index.less';
@@ -55,6 +55,8 @@ export default function (props) {
     null,
   );
 
+  useImgHook('.item-img', (entries) => {}, null);
+
   const handleSubmit = (value) => {
     _handleSubmit(value);
   };
@@ -105,7 +107,12 @@ export default function (props) {
         <div className="result">
           {houseLists.map((item) => (
             <div className="item" key={item.id}>
-              <img alt="img" src={item.img} />
+              <img
+                className="item-img"
+                data-src={item.img}
+                alt="img"
+                src={require('../../assets/blank.png')}
+              />
               <div className="item-right">
                 <div className="title">{item.title}</div>
                 <div className="price">{item.price}</div>

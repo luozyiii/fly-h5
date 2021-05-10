@@ -62,4 +62,10 @@ if (observer && node) {}
 ### 使用useObserverHook实现滚动加载
 /src/pages/search.js
 
+### 使用useImgHook实现图片懒加载; 核心API也是IntersectionObserver
+```
+ * 1、监听图片是否进入可视区域
+ * 2、将src属性的值替换为真实的图片地址 data-src
+ * 3、停止监听当前的节点
+```
 
