@@ -29,6 +29,11 @@ export default defineConfig({
           component: './search/index',
           title: '搜索',
         },
+        {
+          path: '/observer',
+          component: './observer',
+          title: 'observer',
+        },
       ],
     },
   ],

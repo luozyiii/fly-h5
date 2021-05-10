@@ -38,3 +38,16 @@ yarn add dayjs
 ### 搜索页面
 - antd-mobild SearchBar、ActivityIndicator 组件
 - /mock/house.js 接口延迟3s返回
+
+### Intersection Observer
+[IntersectionObserver](https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver)
+接口 (从属于Intersection Observer API) 提供了一种异步观察目标元素与其祖先元素或顶级文档视窗(viewport)交叉状态的方法。祖先元素与视窗(viewport)被称为根(root)。
+
+- intersectionRatio 
+(0~1): 0 不在可视区域 1 完全在可视区域
+
+- isIntersecting(true/false)
+是否在可视区域
+
+
+
