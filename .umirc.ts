@@ -34,6 +34,11 @@ export default defineConfig({
           component: './observer',
           title: 'observer',
         },
+        {
+          path: '/house',
+          component: './house',
+          title: '房屋详情',
+        },
       ],
     },
   ],

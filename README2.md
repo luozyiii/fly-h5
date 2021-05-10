@@ -83,3 +83,22 @@ if (observer && node) {}
  yarn add project-libs
 
  ```
+
+ ### 民宿详情页面界面开发
+ - 页面解耦 分Banner/Info/Lists/Footer 子组件
+
+ - 滑动组件 [react-awesome-swiper](https://github.com/limingziqiang/react-awesome-swiper)
+ ```
+ // 内容里面样式有要求
+ <AwesomeSwiper>
+  <div className="swiper-warpper">
+    <div className="swiper-slide">
+      内容
+    </div>
+    <div className="swiper-slide">
+      内容
+    </div>
+  </div>
+  <div className="swiper-pagination"></div>
+</AwesomeSwiper>
+ ```
