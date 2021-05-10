@@ -7,7 +7,7 @@ export default function useObserverHook(ele, callback, watch = []) {
     observer = new IntersectionObserver((entries) => {
       callback && callback(entries);
     });
-    observer.observe(node);
+    node && observer.observe(node);
 
     return () => {
       if (observer && node) {

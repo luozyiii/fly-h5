@@ -59,4 +59,7 @@ Uncaught TypeError: Failed to execute 'unobserve' on 'IntersectionObserver': par
 if (observer && node) {}
 ```
 
+### 使用useObserverHook实现滚动加载
+/src/pages/search.js
+
 

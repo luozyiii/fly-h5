@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { SearchBar, ActivityIndicator } from 'antd-mobile';
-import { useHttpHook } from '@/hooks';
+import { useHttpHook, useObserverHook } from '@/hooks';
+import { useLocation } from 'umi';
 
 import './index.less';
 
 export default function (props) {
+  const { query } = useLocation();
+  // console.log('query:', query);
   const [houseName, setHouseName] = useState();
+  const [page, setPage] = useState({
+    pageSize: 8,
+    pageNum: 1,
+  });
+  const [houseLists, setHouseLists] = useState([]);
+  const [showLoading, setShowLoading] = useState(true);
+  const [houseSubmitName, setHouseSubmitName] = useState('');
 
   const handleChange = (value) => {
     // console.log(value);
@@ -14,14 +24,69 @@ export default function (props) {
 
   const [houses, loading] = useHttpHook({
     url: '/house/search',
-    body: {},
+    body: {
+      ...page,
+      houseSubmitName,
+      code: query?.code,
+      startTime: query?.startTime + ' 00:00:00',
+      endTime: query?.endTime + ' 23:59:59',
+    },
+    watch: [page.pageNum, houseSubmitName],
   });
 
-  const handelCancel = () => {};
+  /**
+   * 技术要点：借助一个元素的是否在可视区域，从而实现列表的滚动加载；核心API IntersectionObserver
+   * 1、监听loading是否展示出来
+   * 2、修改分页数据
+   * 3、监听分页数据的修改，发送接口，请求下一页的数据
+   * 4、监听loading的变化，拼装数据
+   */
+  useObserverHook(
+    '#loading',
+    (entries) => {
+      if (!loading && entries[0].isIntersecting) {
+        console.log('11111111111111');
+        setPage({
+          ...page,
+          pageNum: page.pageNum + 1,
+        });
+      }
+    },
+    null,
+  );
 
-  const handleSubmit = (value) => {};
+  const handleSubmit = (value) => {
+    _handleSubmit(value);
+  };
 
-  useEffect(() => {}, []);
+  const handelCancel = () => {
+    // console.log('取消');
+    _handleSubmit('');
+  };
+
+  const _handleSubmit = (value) => {
+    // console.log(value);
+    setHouseName(value);
+    setHouseSubmitName(value);
+    setPage({
+      pageSize: 8,
+      pageNum: 1,
+    });
+    setHouseLists([]);
+  };
+
+  useEffect(() => {
+    if (!loading && houses) {
+      if (houses.length) {
+        setHouseLists([...houseLists, ...houses]);
+        if (houses.length < page.pageSize) {
+          setShowLoading(false);
+        }
+      } else {
+        setShowLoading(false);
+      }
+    }
+  }, [loading]);
 
   return (
     <div className="search-page">
@@ -34,11 +99,11 @@ export default function (props) {
         onSubmit={handleSubmit}
       />
       {/* 搜索结果 */}
-      {loading ? (
+      {!houseLists.length ? (
         <ActivityIndicator toast />
       ) : (
         <div className="result">
-          {houses.map((item) => (
+          {houseLists.map((item) => (
             <div className="item" key={item.id}>
               <img alt="img" src={item.img} />
               <div className="item-right">
@@ -47,6 +112,11 @@ export default function (props) {
               </div>
             </div>
           ))}
+          {showLoading ? (
+            <div id="loading">loading</div>
+          ) : (
+            <div>没有数据了</div>
+          )}
         </div>
       )}
     </div>
