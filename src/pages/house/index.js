@@ -39,7 +39,7 @@ export default function (props) {
         showLoading &&
         entries[0].isIntersecting
       ) {
-        console.log(entries);
+        // console.log(entries);
         reloadComments();
       }
     },
