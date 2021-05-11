@@ -13,18 +13,47 @@ import './index.less';
 export default function (props) {
   const { query } = useLocation();
   const {
-    house: { detail, getDetailAsync, comments, getCommentsAsync, showLoading },
+    house: {
+      detail,
+      getDetailAsync,
+      comments,
+      getCommentsAsync,
+      showLoading,
+      reloadComments,
+      reloadCommentsNum,
+    },
   } = useStoreHook();
 
-  useObserverHook('#' + CommonEnum.LOADING_ID, (entries) => {});
+  /**
+   * 1，监听loading是否展示出来
+   * 2，触发reload，修改分页
+   * 3，监听reload变化，重新请求接口
+   * 4，拼装数据
+   */
+  useObserverHook(
+    '#' + CommonEnum.LOADING_ID,
+    (entries) => {
+      if (
+        comments &&
+        comments.length &&
+        showLoading &&
+        entries[0].isIntersecting
+      ) {
+        console.log(entries);
+        reloadComments();
+      }
+    },
+    [comments, showLoading],
+  );
 
   useEffect(() => {
     getDetailAsync({ id: query?.id });
   }, []);
 
   useEffect(() => {
+    console.log('1111');
     getCommentsAsync({ id: query?.id });
-  }, []);
+  }, [reloadCommentsNum]);
 
   return (
     <div className="house-page">
