@@ -24,6 +24,7 @@
     "@umijs/preset-react": "1.x",
     "dayjs": "^1.10.4",
     "project-libs": "^1.1.5",
+    "rc-form": "^2.4.12",
     "react-awesome-swiper": "^1.4.16",
     "react-icons": "^4.2.0",
     "think-react-store": "^1.6.71",

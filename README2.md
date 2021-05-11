@@ -148,3 +148,17 @@ componentWillReceiveProps(nextProps) {
 * 4、拼装数据，然后page
 */
 ```
+
+### 我的
+- rc-form 处理表单数据
+```
+// 安装
+yarn add rc-form
+
+// 使用
+import { createForm } from 'rc-form';
+
+function Edit() { }
+
+export default createForm()(Edit);
+```
