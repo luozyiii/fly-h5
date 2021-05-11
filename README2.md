@@ -239,3 +239,16 @@ export default memo(Search, areEqual);
 
 - hot 组件优化
 渲染了2次 ： props?.house 从 无 到 有， 渲染了2次
+
+### 订单页面优化-骨架屏
+- 原理
+（1）通过伪元素实现骨架样式
+（2）制作布局组件，添加骨架样式
+（3）替换默认Loading效果
+
+- 添加骨架屏样式
+/src/global.css
+
+- 编写骨架屏组件 OrderSkeletons
+
+- 将ActivityIndicator 替换成 OrderSkeletons
