@@ -18,6 +18,7 @@ export default defineConfig({
           path: '/order',
           component: './order/index',
           title: '订单',
+          auth: true,
         },
         {
           path: '/user',

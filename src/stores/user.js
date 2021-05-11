@@ -1,6 +1,7 @@
 import { Http } from '@/utils';
 import { Toast } from 'antd-mobile';
 import { history } from 'umi';
+import { urlGet } from 'project-libs';
 
 export default {
   state: {
@@ -51,8 +52,10 @@ export default {
         body: payload,
       });
       if (result) {
+        // console.log(urlGet('from')); // 获取url from 参数
         localStorage.setItem('token', result.token);
         localStorage.setItem('username', result.username);
+        history.push(urlGet('from'));
         Toast.success('登录成功');
       }
     },

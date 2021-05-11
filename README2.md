@@ -168,3 +168,37 @@ export default createForm()(Edit);
 /login
 /register
 ```
+
+### 通过 umi 运行时配置，对页面进行登陆验证
+
+- 用户信息用localStorage存储
+
+- 运行时配置, 用户鉴权  /src/app.js
+```
+// /src/app.js
+
+import { history } from 'umi';
+
+// 运行时配置： 用户登录鉴权
+export function onRouteChange(route) {
+  // console.log(route);
+  const nowPath = route.routes[0].routes.filter(
+    (item) => item.path === route.location.pathname,
+  );
+  // console.log(nowPath);
+  const isLogin = localStorage.getItem('username');
+  if (nowPath.length === 1 && nowPath[0].auth && !isLogin) {
+    history.push({
+      pathname: '/login',
+      query: {
+        from: route.location.pathname, // 记录之前页面路由
+      },
+    });
+  }
+}
+
+// 获取url参数, 跳转回之前页面
+import { urlGet } from 'project-libs'
+urlGet('from')
+
+```
