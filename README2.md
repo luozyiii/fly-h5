@@ -59,6 +59,17 @@ Uncaught TypeError: Failed to execute 'unobserve' on 'IntersectionObserver': par
 if (observer && node) {}
 ```
 
+- 滚动加载
+```
+/**
+* 技术要点：借助一个元素的是否在可视区域，从而实现列表的滚动加载；核心API IntersectionObserver
+* 1、监听loading是否展示出来
+* 2、修改分页数据
+* 3、监听分页数据的修改，发送接口，请求下一页的数据
+* 4、监听loading的变化，拼装数据
+*/
+```
+
 ### 使用useObserverHook实现滚动加载
 /src/pages/search.js
 
@@ -110,4 +121,30 @@ componentWillReceiveProps(nextProps) {
     showModal: nextProps.show,
   });
 }
+```
+
+- 滚动加载评论
+```
+/**
+* 1，监听loading是否展示出来
+* 2，触发reload，修改分页
+* 3，监听reload变化，重新请求接口
+* 4，拼装数据
+*/
+```
+
+- 不同组件的通信（使用think-react-store）
+
+### 订单页面的开发
+
+- 页面解耦，共用订单列表页Lists, 列表项单独为一个展示的子组件Item
+- 单一组件通信，不需要引用think-react-store
+- 滚动加载
+```
+/**
+* 1、页面初始化的时候请求接口
+* 2、监听loading组件是否展示出来
+* 3、修改page，pageNum + 1，挨次重新请求接口
+* 4、拼装数据，然后page
+*/
 ```
