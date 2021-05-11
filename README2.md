@@ -202,3 +202,40 @@ import { urlGet } from 'project-libs'
 urlGet('from')
 
 ```
+
+### 首页优化
+- header 组件加载的时候render方法被执行了多次; 如何优化?
+
+```
+// 使用 memo 方法 优化
+import React, { memo } from 'react';
+
+export default memo(Header)
+```
+优化后仅执行一次
+
+- search 组件优化后
+```
+export default memo(Search); // 优化后也执行了多次，这是因为props值变化导致； header组件没有props 值传入
+
+// last 最后
+// memo 第二个参数
+function areEqual(prevProps, nextProps) {
+  console.log(prevProps, nextProps);
+  // true 可以渲染; 优化后剩下3次
+  if (
+    prevProps.citys === nextProps.citys &&
+    prevProps.citysLoading === nextProps.citysLoading
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+export default memo(Search, areEqual);
+
+```
+
+- hot 组件优化
+渲染了2次 ： props?.house 从 无 到 有， 渲染了2次

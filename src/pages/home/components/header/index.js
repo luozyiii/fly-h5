@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { Link } from 'umi';
 
-export default function (props) {
+function Header(props) {
   const [username, setUsername] = useState(localStorage.getItem('username'));
-
+  console.log('header render'); // 加载的时候header 执行了多次; 使用memo 仅执行一次
   useEffect(() => {}, []);
 
   return (
@@ -21,3 +21,5 @@ export default function (props) {
     </div>
   );
 }
+
+export default memo(Header);

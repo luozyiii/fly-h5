@@ -32,7 +32,7 @@ export default function Http({
     fetch(`/api${url}`, params)
       .then((res) => res.json())
       .then((res) => {
-        console.log('res:', res);
+        // console.log('res:', res);
         if (res.status === 200) {
           resolve(res.data);
           setResult && setResult(res.data);
