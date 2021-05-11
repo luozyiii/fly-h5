@@ -24,6 +24,7 @@ export default {
       data: {
         id: 100,
         username: 'admin',
+        token: 'woshitoken',
       },
     });
   },
@@ -33,6 +34,7 @@ export default {
       data: {
         id: 100,
         username: 'admin',
+        token: 'woshitoken',
       },
     });
   },

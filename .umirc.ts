@@ -30,6 +30,16 @@ export default defineConfig({
           title: '设置',
         },
         {
+          path: '/login',
+          component: './login',
+          title: '登录',
+        },
+        {
+          path: '/register',
+          component: './register',
+          title: '注册',
+        },
+        {
           path: '/search',
           component: './search/index',
           title: '搜索',

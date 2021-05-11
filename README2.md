@@ -162,3 +162,9 @@ function Edit() { }
 
 export default createForm()(Edit);
 ```
+
+### 登录和注册页面开发
+```
+/login
+/register
+```
