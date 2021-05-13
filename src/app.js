@@ -7,7 +7,7 @@ export function onRouteChange(route) {
     (item) => item.path === route.location.pathname,
   );
   // console.log(nowPath);
-  const isLogin = localStorage.getItem('username');
+  const isLogin = localStorage.getItem('token');
   if (nowPath.length === 1 && nowPath[0].auth && !isLogin) {
     history.push({
       pathname: '/login',

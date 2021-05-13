@@ -55,7 +55,7 @@ export default {
         // console.log(urlGet('from')); // 获取url from 参数
         localStorage.setItem('token', result.token);
         localStorage.setItem('username', result.username);
-        history.push(urlGet('from'));
+        urlGet('from') && history.push(urlGet('from'));
         Toast.success('登录成功');
       }
     },
@@ -68,6 +68,17 @@ export default {
         localStorage.setItem('token', result.token);
         localStorage.setItem('username', result.username);
         Toast.success('注册成功');
+      }
+    },
+    async logoutAsync(dispatch, rootState, payload) {
+      const result = await Http({
+        url: '/user/logout',
+        body: payload,
+      });
+      if (result) {
+        localStorage.clear();
+        Toast.success('退出登录成功');
+        location.href = '/login?from=' + location.pathname;
       }
     },
   },

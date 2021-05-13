@@ -7,7 +7,7 @@ import './index.less';
 
 export default function (props) {
   const {
-    user: { avatar, phone, sign, getUserAsync, editUserAsync },
+    user: { avatar, phone, sign, getUserAsync, logoutAsync, editUserAsync },
   } = useStoreHook();
 
   const handleClick = () => {
@@ -19,9 +19,13 @@ export default function (props) {
     });
   };
 
-  const handleLogout = () => {};
+  const handleLogout = () => {
+    logoutAsync();
+  };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    getUserAsync({});
+  }, []);
 
   return (
     <div className="user-page">
