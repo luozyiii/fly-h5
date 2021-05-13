@@ -14,8 +14,8 @@ function Edit(props) {
 
   const handleChange = (files) => {
     // console.log('files:', files);
-    if (files[0]?.file?.size / 1024 / 1024 > 0.5) {
-      Toast.fail('图片大小不能大于0.5M');
+    if (files[0]?.file?.size / 1024 / 1024 > 1) {
+      Toast.fail('图片大小不能大于1M');
       return;
     }
     setFiles(files);
@@ -54,31 +54,25 @@ function Edit(props) {
   return (
     <div className="user-edit">
       <List>
-        <List.Item>
-          <ImagePicker
-            files={files}
-            selectable={files.length < 1}
-            onChange={handleChange}
-          />
-        </List.Item>
-        <List.Item>
-          <InputItem
-            {...getFieldProps('tel', {
-              rules: [{ required: true }],
-              initialValue: phone,
-            })}
-            placeholder="电话"
-          />
-        </List.Item>
-        <List.Item>
-          <InputItem
-            {...getFieldProps('sign', {
-              rules: [{ required: true }],
-              initialValue: sign,
-            })}
-            placeholder="签名"
-          />
-        </List.Item>
+        <ImagePicker
+          files={files}
+          selectable={files.length < 1}
+          onChange={handleChange}
+        />
+        <InputItem
+          {...getFieldProps('tel', {
+            rules: [{ required: true }],
+            initialValue: phone,
+          })}
+          placeholder="电话"
+        />
+        <InputItem
+          {...getFieldProps('sign', {
+            rules: [{ required: true }],
+            initialValue: sign,
+          })}
+          placeholder="签名"
+        />
       </List>
       <Button
         type="warning"
