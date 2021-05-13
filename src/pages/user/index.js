@@ -13,9 +13,6 @@ export default function (props) {
   const handleClick = () => {
     history.push({
       pathname: '/user/edit',
-      query: {
-        id: 10,
-      },
     });
   };
 
