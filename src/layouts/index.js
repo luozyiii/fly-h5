@@ -13,7 +13,7 @@ function BasicLayout(props) {
         show={paths.includes(location.pathname)}
         pathname={location.pathname}
       />
-      <ErrorBoundary>{props.children}</ErrorBoundary>
+      {props.children}
     </StoreProvider>
   );
 }

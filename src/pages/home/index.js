@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ErrorBoundary } from '@/components';
 import Header from './components/header';
 import Search from './components/search';
 import Hot from './components/hot';
@@ -20,13 +21,15 @@ export default function (props) {
   useEffect(() => {}, []);
 
   return (
-    <div className="home">
-      {/* header 登录 */}
-      <Header />
-      {/* 搜索 */}
-      <Search citys={citys} citysLoading={citysLoading} />
-      {/* 热门民宿 */}
-      <Hot house={house} />
-    </div>
+    <ErrorBoundary>
+      <div className="home">
+        {/* header 登录 */}
+        <Header />
+        {/* 搜索 */}
+        <Search citys={citys} citysLoading={citysLoading} />
+        {/* 热门民宿 */}
+        <Hot house={house} />
+      </div>
+    </ErrorBoundary>
   );
 }
