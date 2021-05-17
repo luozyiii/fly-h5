@@ -13,6 +13,7 @@ export default function (props) {
   const [citys, citysLoading] = useHttpHook({
     url: '/commons/citys',
   });
+  console.log(citys, citysLoading);
 
   const [house] = useHttpHook({
     url: '/house/hot',
@@ -26,9 +27,9 @@ export default function (props) {
         {/* header 登录 */}
         <Header />
         {/* 搜索 */}
-        <Search citys={citys} citysLoading={citysLoading} />
+        {citys && <Search citys={citys} citysLoading={citysLoading} />}
         {/* 热门民宿 */}
-        <Hot house={house} />
+        {house && <Hot house={house} />}
       </div>
     </ErrorBoundary>
   );

@@ -51,7 +51,6 @@ export default function (props) {
   }, []);
 
   useEffect(() => {
-    console.log('1111');
     getCommentsAsync({ id: query?.id });
   }, [reloadCommentsNum]);
 

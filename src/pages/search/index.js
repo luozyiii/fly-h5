@@ -97,6 +97,20 @@ export default function (props) {
         onSubmit={handleSubmit}
       />
       {/* 搜索结果 */}
+      {/* 首次加载没有数据 */}
+      {!loading && !houseLists.length && (
+        <div
+          style={{
+            height: '100px',
+            lineHeight: '100px',
+            marginTop: '40px',
+            textAlign: 'center',
+          }}
+        >
+          没有数据...
+        </div>
+      )}
+      {/* 正常情况下列表 */}
       {!houseLists.length ? (
         <ActivityIndicator toast />
       ) : (
@@ -105,12 +119,12 @@ export default function (props) {
             <div className="item" key={item.id}>
               <img
                 className="item-img"
-                data-src={item.img}
+                data-src={item?.imgs[0]?.url}
                 alt="img"
                 src={require('../../assets/blank.png')}
               />
               <div className="item-right">
-                <div className="title">{item.title}</div>
+                <div className="title">{item.name}</div>
                 <div className="price">{item.price}</div>
               </div>
             </div>

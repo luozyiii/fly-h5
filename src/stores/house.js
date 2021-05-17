@@ -62,7 +62,7 @@ export default {
     async getCommentsAsync(dispatch, rootState, payload) {
       const { comments, page } = rootState.house;
       const lists = await Http({
-        url: '/comments/lists',
+        url: '/comment/lists',
         body: {
           pageSize: page.pageSize,
           pageNum: page.pageNum,
@@ -80,7 +80,7 @@ export default {
     },
     async addCommentsAsync(dispatch, rootState, payload) {
       const result = await Http({
-        url: '/comments/add',
+        url: '/comment/add',
         body: payload,
       });
       if (result) {
