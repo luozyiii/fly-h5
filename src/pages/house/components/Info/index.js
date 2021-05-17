@@ -5,6 +5,45 @@ import { timer } from '@/utils';
 export default function (props) {
   useEffect(() => {}, []);
 
+  const handleOrder = (id) => {
+    props?.btnClick(id);
+  };
+
+  const renderBtn = () => {
+    // order 没有id，说明订单一定不存在
+    if (!props?.order?.id) {
+      return (
+        <Button
+          className="info-btn"
+          type="warning"
+          onClick={() => handleOrder()}
+        >
+          预定
+        </Button>
+      );
+    }
+    // 已经有订单，处于未支付状态
+    if (props?.order?.isPayed === 0) {
+      return (
+        <Button
+          className="info-btn"
+          type="ghost"
+          onClick={() => handleOrder(props.order.id)}
+        >
+          取消预定
+        </Button>
+      );
+    }
+    // 已经有订单，处于已支付状态
+    if (props.order?.isPayed === 1) {
+      return (
+        <Button className="info-btn" type="ghost">
+          居住中
+        </Button>
+      );
+    }
+  };
+
   return (
     <div className="info">
       <div className="info-title">{props?.detail?.name}</div>
@@ -19,9 +58,7 @@ export default function (props) {
       <div className="info-time">
         结束出租：{timer(props?.detail?.endTime, '')}
       </div>
-      <Button className="info-btn" type="warning">
-        预定
-      </Button>
+      {renderBtn()}
     </div>
   );
 }

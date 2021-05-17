@@ -1,5 +1,19 @@
 import { Http } from '@/utils';
 import { CommonEnum } from '@/enums';
+
+async function handleOrder(url, dispatch, payload) {
+  const result = await Http({
+    url,
+    body: payload,
+  });
+  if (result) {
+    dispatch({
+      type: 'setOrder',
+      payload: result,
+    });
+  }
+}
+
 export default {
   state: {
     detail: {}, // 基本信息
@@ -7,12 +21,19 @@ export default {
     page: CommonEnum.PAGE, // 分页默认配置
     showLoading: true,
     reloadCommentsNum: 0, // 请求加载次数
+    order: null,
   },
   reducers: {
     getDetail(state, payload) {
       return {
         ...state,
         detail: payload,
+      };
+    },
+    setOrder(state, payload) {
+      return {
+        ...state,
+        order: payload,
       };
     },
     getComments(state, payload) {
@@ -89,6 +110,15 @@ export default {
           payload: {},
         });
       }
+    },
+    async hasOrderAsync(dispatch, rootState, payload) {
+      handleOrder('/orders/hasOrder', dispatch, payload);
+    },
+    async addOrderAsync(dispatch, rootState, payload) {
+      handleOrder('/orders/addOrder', dispatch, payload);
+    },
+    async delOrderAsync(dispatch, rootState, payload) {
+      handleOrder('/orders/delOrder', dispatch, payload);
     },
   },
 };
