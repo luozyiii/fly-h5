@@ -313,5 +313,23 @@ export default memo(Search, areEqual);
 3，没有缓存，将接口返回结果保存到redis中
 ```
 
+## 部署
+- ngnix
+```javascript
+// 将nginx代码拷贝到服务器
+scp -rp nginx root@112.74.201.142:/home/fly
+
+// nginx 服务部署,映射本地目录到nginx容器
+docker run -d -p 8080:80 --name docker_nginx \
+  -v /home/fly/nginx/logs:/var/log/nginx \
+  -v /home/fly/nginx/conf/nginx.conf:/etc/nginx/nginx.conf \
+  -v /home/fly/nginx/conf.d:/etc/nginx/conf.d \
+  -v /home/fly/nginx/html:/usr/share/nginx/html \
+  f0b8a9a54136(镜像ID)
+
+// 前端打包后上传到 /home/fly/nginx/html 即可
+
+```
+
  
 
