@@ -19,7 +19,15 @@ export default function Http({
   defaultHeader = token ? { ...defaultHeader, token } : defaultHeader;
 
   let params;
+  let urlParams = '';
   if (method.toUpperCase() === 'GET') {
+    Object.keys(body).forEach((key) => {
+      urlParams += key + '=' + body[key] + '&';
+    });
+    if (urlParams) {
+      urlParams = urlParams.substring(0, urlParams.length - 1);
+      urlParams = '?' + urlParams;
+    }
     params = undefined;
   } else {
     params = {
@@ -33,7 +41,7 @@ export default function Http({
   }
 
   return new Promise((resolve, reject) => {
-    fetch(`/api${url}`, params)
+    fetch(`/api${url}${urlParams}`, params)
       .then((res) => res.json())
       .then((res) => {
         // console.log('res:', res);
